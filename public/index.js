@@ -10,7 +10,10 @@ document.querySelectorAll(".del").forEach((button) => {
         fetch(`/notes/${event.target.getAttribute("index")}`, {
             method: 'DELETE',
         })
-        // location.reload() is cheating
-        location.reload()
+        .then((response) => {
+            if (response.status === 200) {
+                location.reload()
+            }
+        })
     })
 })
