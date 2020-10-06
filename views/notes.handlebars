@@ -1,0 +1,18 @@
+<h2>Notes here</h2>
+<div>
+    <ul>
+        {{#each data as |value key|}}
+        <div>
+            <li index="{{ key }}">
+                {{ value }}
+            </li>
+            <button index="{{ key }}" class="put">
+                modify
+            </button>
+            <button index="{{ key }}" class="del">
+                delete
+            </button>
+        </div>
+        {{/each }}
+    </ul>
+</div>
