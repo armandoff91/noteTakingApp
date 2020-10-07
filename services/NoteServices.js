@@ -39,7 +39,7 @@ class NoteService {
     }
 
     add(text) {
-        this.refresh()
+        return this.refresh()
         .then(() => {
             this.note.push(text)
         })

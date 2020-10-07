@@ -1,12 +1,19 @@
 <h2>Notes here</h2>
 <div>
+    <h4>Add new notes</h4>
+    <form class="add">
+        <input type="text" name="newEntry" placeholder="">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div>
     <ul>
         {{#each data as |value key|}}
         <div>
             <li index="{{ key }}">
                 {{ value }}
             </li>
-            <button index="{{ key }}" class="put">
+            <button index="{{ key }}" class="expandPut">
                 modify
             </button>
             <button index="{{ key }}" class="del">

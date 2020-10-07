@@ -10,29 +10,33 @@ userInstance = new NoteService(userId)
 router
     .route("/")
     .get((req, res) => {
-        console.log(userInstance.list())
         res.render("notes", {data: userInstance.list()})
     })
     .post((req, res) => {
         console.log(req.body)
+        userInstance.add(req.body.newEntry)
+        .then(() => {
+            res.send(typeof(req.body))
+            // res.render("notes", {data: userInstance.list()})
+        })
     })
 
 router
     .route("/:noteId")
     .put((req, res) => {
-        // req.params.id
         res.send("this is put notes: " + req.params.noteId)
     })
     .delete((req, res) => {
         console.log(`delete request recieved, noteId: ${req.params.noteId}`)
         userInstance.delete(req.params.noteId)
-        res.render("notes", {data: userInstance.list()})
-        // userInstance.delete(req.params.noteId).then(() => {
-        //     res.render("notes", {data: userInstance.list()})
-        //     console.log(userInstance.list())
-        // })
-        // (unconfirmed: if you do not wrap delete in promise, res will render before delete
-
+        // is it necessary to wrap res.render in .then()?
+        .then(() => {
+            res.render("notes", {data: userInstance.list()})
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+        // unconfirmed: if you do not wrap delete in promise, res will render before delete
     })
 
 
