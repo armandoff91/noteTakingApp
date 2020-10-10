@@ -3,15 +3,17 @@
         <input type="text" name="newEntry" placeholder="">
         <button type="submit">Add</button>
     </form> --}}
-    <form class="add">
-        <div class="input-group">
-        <textarea type="text" class="form-control add" name="newEntry" placeholder="Add new notes here..."></textarea>
-        <input class="btn btn-warning float-right" type="submit">
+    <div class="col">
+        <form class="add">
+            <div class="input-group">
+                <textarea type="text" class="form-control add" name="newEntry" placeholder="Add new notes here..."></textarea>
+                <input class="btn btn-warning float-right" type="submit">
+            </div>
+        </form>
     </div>
-    </form>
 </div>
 <div class="container" id="noteContainer">
-    <div class="accordion" id="noteGroup">
+    <div class="accordion col" id="noteGroup">
         {{#each data as |value key|}}
         <div class="card">
             <div class="card-header" id="heading{{key}}">

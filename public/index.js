@@ -2,7 +2,7 @@ console.log("frontend script loaded")
 
 var notesTemplate = Handlebars.compile(
     `
-        <div class="accordion" id="noteGroup">
+        <div class="accordion col" id="noteGroup">
             {{#each data as |value key|}}
             <div class="card">
                 <div class="card-header" id="heading{{key}}">
