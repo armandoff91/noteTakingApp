@@ -16,8 +16,7 @@ router
         console.log(req.body)
         userInstance.add(req.body.newEntry)
         .then(() => {
-            res.send(typeof(req.body))
-            // res.render("notes", {data: userInstance.list()})
+            res.json({ data: userInstance.list() })
         })
     })
 
@@ -27,8 +26,7 @@ router
         console.log(req.body)
         userInstance.put(req.params.noteId, req.body.putEntry)
         .then(() => {
-            res.render("notes", {data: userInstance.list()})
-            // unconfirmed: if you do not wrap delete in promise, res will render before delete
+            res.json({ data: userInstance.list() })
         })
         .catch((err) => {
             console.error(err)
@@ -37,10 +35,8 @@ router
     .delete((req, res) => {
         console.log(`delete request recieved, noteId: ${req.params.noteId}`)
         userInstance.delete(req.params.noteId)
-        // is it necessary to wrap res.render in .then()?
         .then(() => {
-            res.render("notes", {data: userInstance.list()})
-            // unconfirmed: if you do not wrap delete in promise, res will render before delete
+            res.json({ data: userInstance.list() })
         })
         .catch((err) => {
             console.error(err)

@@ -5,15 +5,12 @@
     </form> --}}
     <form class="add">
         <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-lg">New Notes</span>
-        </div>
-        <input type="text" class="form-control add" aria-label="With textarea" name="newEntry">
-        <input type="submit">
+        <textarea type="text" class="form-control add" name="newEntry" placeholder="Add new notes here..."></textarea>
+        <input class="btn btn-warning float-right" type="submit">
     </div>
     </form>
 </div>
-<div class="container">
+<div class="container" id="noteContainer">
     <div class="accordion" id="noteGroup">
         {{#each data as |value key|}}
         <div class="card">
@@ -22,7 +19,7 @@
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{key}}">
                         {{value}}
                     </button>
-                    <button type="button" index="{{key}}"class="del btn btn-warning float-righ">Delete</button>
+                    <button type="button" index="{{key}}"class="del btn btn-warning float-right">Delete</button>
                 </h5>
             </div>
             <div id="collapse{{key}}" class="collapse" aria-labelledby="heading{{key}}" data-parent="#noteGroup">
@@ -31,7 +28,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-lg">Change here</span>
                         </div>
-                        <input type="text" class="form-control" index="{{key}}" name="putEntry" aria-label="With textarea" aria-describedby="" value="{{value}}" placeholder="{{value}}">
+                        <textarea type="text" class="form-control" index="{{key}}" name="putEntry" aria-label="With textarea" aria-describedby="" placeholder="{{value}}">{{value}}</textarea>
                         <input type="submit">
                     </div>
                 </form>
