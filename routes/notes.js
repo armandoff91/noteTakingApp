@@ -24,7 +24,15 @@ router
 router
     .route("/:noteId")
     .put((req, res) => {
-        res.send("this is put notes: " + req.params.noteId)
+        console.log(req.body)
+        userInstance.put(req.params.noteId, req.body.putEntry)
+        .then(() => {
+            res.render("notes", {data: userInstance.list()})
+            // unconfirmed: if you do not wrap delete in promise, res will render before delete
+        })
+        .catch((err) => {
+            console.error(err)
+        })
     })
     .delete((req, res) => {
         console.log(`delete request recieved, noteId: ${req.params.noteId}`)
@@ -32,11 +40,11 @@ router
         // is it necessary to wrap res.render in .then()?
         .then(() => {
             res.render("notes", {data: userInstance.list()})
+            // unconfirmed: if you do not wrap delete in promise, res will render before delete
         })
         .catch((err) => {
             console.error(err)
         })
-        // unconfirmed: if you do not wrap delete in promise, res will render before delete
     })
 
 

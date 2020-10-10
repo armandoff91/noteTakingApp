@@ -16,20 +16,54 @@ document.querySelectorAll(".del").forEach((button) => {
     })
 })
 
-
-        // let formData = new FormData();
-        // formData.append("noteIndex", event.target.getAttribute("index"))
-        // console.log(formData.get("noteIndex"))
-    
 document.querySelectorAll(".add").forEach((button) => {
     button.addEventListener("submit", (event) => {
-        console.log(`add clicked`)
-        let newEntry = document.querySelector('input[name="newEntry"]').value
+        event.preventDefault()
+        console.log(`add triggered`)
+        let newEntry = event.target.querySelector('input[name="newEntry"]').value
+        if (newEntry.length == 0) {
+            return
+        }
         var data = JSON.stringify({newEntry: newEntry})
         console.log(data)
         fetch(`/notes`,
         {
             method: 'POST',
+            headers: {
+                // 'Content-Type': 'multipart/form-data'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json'
+            },
+            body: data
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                location.reload()
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    })
+})
+
+document.querySelectorAll(".put").forEach((button) => {
+    button.addEventListener("submit", (event) => {
+        event.preventDefault()
+        console.log(`put triggered`)
+        let putEntry = event.target.querySelector('input[name="putEntry"]').value
+        let index = event.target.querySelector('input[name="putEntry"]').getAttribute("index")
+        if (putEntry == event.target.querySelector('input[name="putEntry"]').placeholder) {
+            return
+        }
+        var data = JSON.stringify({
+            putEntry: putEntry,
+            index: index
+        })
+        console.log(data)
+        fetch(`/notes/${index}`,
+        {
+            method: 'PUT',
             headers: {
                 // 'Content-Type': 'multipart/form-data'
                 // 'Content-Type': 'application/x-www-form-urlencoded',

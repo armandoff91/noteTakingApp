@@ -1,25 +1,42 @@
-<h2>Notes here</h2>
-<div>
-    <h4>Add new notes</h4>
-    <form class="add">
+<div class="container">
+    {{!-- <form class="add">
         <input type="text" name="newEntry" placeholder="">
         <button type="submit">Add</button>
+    </form> --}}
+    <form class="add">
+        <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-lg">New Notes</span>
+        </div>
+        <input type="text" class="form-control add" aria-label="With textarea" name="newEntry">
+        <input type="submit">
+    </div>
     </form>
 </div>
-<div>
-    <ul>
+<div class="container">
+    <div class="accordion" id="noteGroup">
         {{#each data as |value key|}}
-        <div>
-            <li index="{{ key }}">
-                {{ value }}
-            </li>
-            <button index="{{ key }}" class="expandPut">
-                modify
-            </button>
-            <button index="{{ key }}" class="del">
-                delete
-            </button>
+        <div class="card">
+            <div class="card-header" id="heading{{key}}">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ key }}" aria-expanded="false" aria-controls="collapse{{key}}">
+                        {{value}}
+                    </button>
+                    <button type="button" index="{{key}}"class="del btn btn-warning float-righ">Delete</button>
+                </h5>
+            </div>
+            <div id="collapse{{key}}" class="collapse" aria-labelledby="heading{{key}}" data-parent="#noteGroup">
+                <form class="put">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Change here</span>
+                        </div>
+                        <input type="text" class="form-control" index="{{key}}" name="putEntry" aria-label="With textarea" aria-describedby="" value="{{value}}" placeholder="{{value}}">
+                        <input type="submit">
+                    </div>
+                </form>
+            </div>
         </div>
         {{/each }}
-    </ul>
+    </div>
 </div>

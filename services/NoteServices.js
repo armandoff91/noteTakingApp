@@ -49,7 +49,7 @@ class NoteService {
     }
 
     put(noteIndex, revisedText) {
-        this.refresh()
+        return this.refresh()
         .then(() => {
             this.note[noteIndex] = revisedText
         })
